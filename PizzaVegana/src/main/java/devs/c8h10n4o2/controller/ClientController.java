@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
 
 import devs.c8h10n4o2.entities.Client;
 import devs.c8h10n4o2.services.ClientService;
@@ -39,15 +42,22 @@ public class ClientController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/client/{username}", method = RequestMethod.GET)
-	public Client getClientByCredentials(@PathVariable String username) {
-		Gson gson = new Gson();
-		String json = request.getReader().lines().reduce(""(accumulator,actual) ->accumulator+actual);
-		Client cl = gson.fromJson(json, Client.class);
-		Client c = cr.findClientByUsername(cl.getUsername());
-		
-		return cs.getClientByUsername(username);
+	@RequestMapping(value = "/query/clients", method = RequestMethod.GET)
+	public Client getClientByUsername(@RequestParam String username, @RequestParam String password) {
+		Client client = new Client();
+		client.setUsername(username);
+		client.setPassword(password);
+
+		Client c = cs.getClientByUsername(username);
+		if(c.equals(client)) {
+			System.out.println(c);
+			return c;
+		}else {
+			System.out.println("Didnt work");
+			return null;
+		}
 	}
+
 	
 	@ResponseBody
 	@RequestMapping(value = "/clients", method = RequestMethod.POST)
