@@ -7,31 +7,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
+import devs.c8h10n4o2.entities.Client;
 import devs.c8h10n4o2.entities.UserRole;
+import devs.c8h10n4o2.repositories.ClientRepository;
 import devs.c8h10n4o2.repositories.UserRoleRepository;
 
 @SpringBootTest
 @ContextConfiguration(classes = devs.c8h10n4o2.app.PizzaVeganaApplication.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class UserRoleRepositoryTests {
+class ClientRepositoryTests {
 
+	@Autowired
+	ClientRepository cr;
+	
 	@Autowired
 	UserRoleRepository urr;
 	
 	@Test
-	void createUserRoles() {
-		//UserRole ur1 = new UserRole(0,"Employee");
-		//urr.save(ur1);
-		//UserRole ur2 = new UserRole(0,"Client");
-		//urr.save(ur2);
-		UserRole ur3 = new UserRole(0,"Manager");
-		urr.save(ur3);
+	void createClient() {
+		UserRole ur1 =urr.findById(2).get();
+		Client cl = new Client(0,"asd","asd", ur1);
+		cr.save(cl);
 	}
 	
 	@Test
-	void getUserRoleById() {
-		UserRole ur1 =urr.findById(1).get();
-		System.out.println(ur1);
+	void getClientByUsername() {
+		Client cl = cr.findByUsername("username");
+		System.out.println(cl);
 	}
+	
+	
+	
+
 
 }
