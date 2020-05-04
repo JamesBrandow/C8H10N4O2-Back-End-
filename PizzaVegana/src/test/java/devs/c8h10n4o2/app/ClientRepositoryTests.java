@@ -26,7 +26,14 @@ class ClientRepositoryTests {
 	@Test
 	void createClient() {
 		UserRole ur1 =urr.findById(2).get();
-		Client cl = new Client(0,"asd","asd", ur1);
+		Client cl = new Client();
+		cl.setClientId(0);
+		cl.setFirstName("ehi");
+		cl.setLastName("agboneni");
+		cl.setEmail("test@");
+		cl.setPhone("999-999-9999");
+		cl.setUsername("");
+		cl.setPassword("");
 		cr.save(cl);
 	}
 	

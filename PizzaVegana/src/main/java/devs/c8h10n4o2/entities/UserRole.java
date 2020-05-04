@@ -5,7 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+
 
 
 
@@ -20,6 +23,9 @@ public class UserRole {
 	
 	@Column(name="role_title")
 	private String title;
+	
+	@OneToOne(mappedBy = "userRole")
+	private Client client;
 
 	public UserRole() {
 		super();
