@@ -28,18 +28,19 @@ class ClientRepositoryTests {
 		UserRole ur1 =urr.findById(2).get();
 		Client cl = new Client();
 		cl.setClientId(0);
-		cl.setFirstName("ehi");
-		cl.setLastName("agboneni");
-		cl.setEmail("test@");
-		cl.setPhone("999-999-9999");
-		cl.setUsername("");
-		cl.setPassword("");
+		cl.setFirstName("test");
+		cl.setLastName("testlast2");
+		cl.setEmail("test@test2");
+		cl.setPhone("999-999-7777");
+		cl.setUsername("user3");
+		cl.setPassword("pass3");
+		cl.setUserRole(ur1);
 		cr.save(cl);
 	}
 	
 	@Test
 	void getClientByUsername() {
-		Client cl = cr.findByUsername("username");
+		Client cl = cr.findByUsername("user3");
 		System.out.println(cl);
 	}
 	
