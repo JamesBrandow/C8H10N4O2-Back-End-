@@ -1,10 +1,14 @@
 package devs.c8h10n4o2.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -24,8 +28,8 @@ public class UserRole {
 	@Column(name="role_title")
 	private String title;
 	
-	@OneToOne(mappedBy = "userRole")
-	private Client client;
+	@OneToMany(mappedBy = "userRole")
+	private Set<Client> clients = new HashSet<Client>();
 
 	public UserRole() {
 		super();
