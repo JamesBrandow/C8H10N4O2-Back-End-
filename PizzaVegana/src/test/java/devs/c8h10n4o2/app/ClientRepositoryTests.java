@@ -25,15 +25,15 @@ class ClientRepositoryTests {
 	
 	@Test
 	void createClient() {
-		UserRole ur1 =urr.findById(2).get();
+		UserRole ur1 =urr.findById(1).get();
 		Client cl = new Client();
 		cl.setClientId(0);
-		cl.setFirstName("test");
-		cl.setLastName("testlast2");
-		cl.setEmail("test@test2");
-		cl.setPhone("999-999-7777");
-		cl.setUsername("user3");
-		cl.setPassword("pass3");
+		cl.setFirstName("customer2");
+		cl.setLastName("customlast");
+		cl.setEmail("test@customer2");
+		cl.setPhone("111-111-2222");
+		cl.setUsername("customer2");
+		cl.setPassword("custompass");
 		cl.setUserRole(ur1);
 		cr.save(cl);
 	}

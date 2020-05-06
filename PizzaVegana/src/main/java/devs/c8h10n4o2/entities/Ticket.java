@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,7 +34,7 @@ public class Ticket {
 	@Column(name="note")
 	private String note;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="client_id")
 	private Client client;
 	
@@ -47,8 +48,18 @@ public class Ticket {
 		super();
 		
 	}
-
 	
+	public Ticket(int ticketId, String placementTime, String status, String note, Client client, double cost,
+			Set<Pizza> pizzas) {
+		this.ticketId = ticketId;
+		this.placementTime = placementTime;
+		this.status = status;
+		this.note = note;
+		this.client = client;
+		this.cost = cost;
+		this.pizzas = pizzas;
+	}
+
 	public int getTicketId() {
 		return ticketId;
 	}
@@ -87,6 +98,33 @@ public class Ticket {
 
 	public void setCost(double cost) {
 		this.cost = cost;
+	}
+
+
+	public Client getClient() {
+		return client;
+	}
+
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+
+	public Set<Pizza> getPizzas() {
+		return pizzas;
+	}
+
+
+	public void setPizzas(Set<Pizza> pizzas) {
+		this.pizzas = pizzas;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Ticket [ticketId=" + ticketId + ", placementTime=" + placementTime + ", status=" + status + ", note="
+				+ note + ", client=" + client + ", cost=" + cost + ", pizzas=" + pizzas + "]";
 	}
 	
 	

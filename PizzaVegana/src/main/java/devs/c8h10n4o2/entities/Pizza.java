@@ -35,9 +35,6 @@ public class Pizza {
 	@Column(name = "pizza_status")
 	private String status;
 	
-	
-
-
 	@ManyToMany(mappedBy = "pizzas")
 	Set<PizzaItems> items = new HashSet<PizzaItems>();
 
