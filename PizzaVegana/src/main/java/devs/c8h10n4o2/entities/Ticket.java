@@ -3,6 +3,7 @@ package devs.c8h10n4o2.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -43,7 +44,7 @@ public class Ticket {
 	@Column(name="cost")
 	private double cost;
 	
-	@OneToMany(mappedBy = "ticket")
+	@OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Set<Pizza> pizzas = new HashSet<Pizza>();
 

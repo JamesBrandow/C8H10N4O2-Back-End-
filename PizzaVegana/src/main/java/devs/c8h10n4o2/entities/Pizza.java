@@ -3,12 +3,14 @@ package devs.c8h10n4o2.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -37,7 +39,10 @@ public class Pizza {
 	@Column(name = "pizza_status")
 	private String status;
 
-	@ManyToMany(mappedBy = "pizzas")
+	@ManyToMany
+	@JoinTable(name = "pizza_pizzaitems", //junction table name
+	joinColumns =  {@JoinColumn(name = "ppi_pizza_id")}, //column of entity
+	inverseJoinColumns = {@JoinColumn(name = "ppi_item_id")}) //column of the linked entity
 	Set<PizzaItems> items = new HashSet<PizzaItems>();
 
 	public Pizza() {

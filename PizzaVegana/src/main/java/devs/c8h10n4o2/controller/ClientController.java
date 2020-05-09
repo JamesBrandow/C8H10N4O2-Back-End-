@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import devs.c8h10n4o2.entities.Client;
+import devs.c8h10n4o2.entities.UserRole;
 import devs.c8h10n4o2.services.ClientService;
 import devs.c8h10n4o2.services.UserRoleService;
 
@@ -61,8 +62,21 @@ public class ClientController {
 	@RequestMapping(value = "/clients", method = RequestMethod.POST)
 	public Client createClient(@RequestBody Client client) {	
 		System.out.println(client);
+		UserRole ur = us.getUserRoleById(2);
+		client.setUserRole(ur);
 		return cs.createClient(client);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/updateclient", method = RequestMethod.PUT)
+	public Client updateClient(@RequestBody Client client) {
+		System.out.println(client);
+		UserRole u = us.getUserRoleById(2);
+		//System.out.println(u.getRoleId());
+		//client.setUserRole(userRole););
+		client.setUserRole(u);
+		return cs.updateClient(client);
+	} 
 	
 	
 	

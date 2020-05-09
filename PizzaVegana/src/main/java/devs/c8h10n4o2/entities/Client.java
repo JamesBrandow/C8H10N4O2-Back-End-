@@ -2,6 +2,7 @@ package devs.c8h10n4o2.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "client")
@@ -43,15 +46,14 @@ public class Client {
 	@JoinColumn(name = "role_id")
 	private UserRole userRole;
 	
-	@OneToMany(mappedBy = "client")
+	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Set<Ticket> tickets = new HashSet<Ticket>();
 	
 	
 	public Client() {
 		super();
 	}
-
-	
 
 	public Client(int clientId, String firstName, String lastName, String email, String phone, String username,
 			String password, UserRole userRole) {
@@ -65,31 +67,21 @@ public class Client {
 		this.userRole = userRole;
 	}
 
-	
-
 	public int getClientId() {
 		return clientId;
 	}
-
-
 
 	public void setClientId(int clientId) {
 		this.clientId = clientId;
 	}
 
-
-
 	public String getFirstName() {
 		return firstName;
 	}
 
-
-
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-
-
 
 	public String getLastName() {
 		return lastName;
@@ -160,6 +152,14 @@ public class Client {
 	public void setUserRole(UserRole userRole) {
 		this.userRole = userRole;
 	}
+
+	public Set<Ticket> getTickets() {
+		return tickets;
+	}
+
+//	public void setTickets(Set<Ticket> tickets) {
+//		this.tickets = tickets;
+//	}
 
 
 

@@ -7,11 +7,15 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import devs.c8h10n4o2.entities.Ticket;
+import devs.c8h10n4o2.repositories.PizzaRepository;
 import devs.c8h10n4o2.repositories.TicketRepository;
 
 @Component
 @Service
 public class TicketService implements TicketServiceI{
+	
+	@Autowired
+	PizzaRepository ps;
 	
 	@Autowired
 	TicketRepository tr;

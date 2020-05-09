@@ -33,13 +33,6 @@ public class PizzaItems {
 	@Column(name = "item_category")
 	private String category;
 	
-	@ManyToMany
-	@JoinTable(name = "pizza_pizzaitems", //junction table name
-	joinColumns =  {@JoinColumn(name = "ppi_item_id")}, //column of entity
-	inverseJoinColumns = {@JoinColumn(name = "ppi_pizza_id")}) //column of the linked entity
-	@JsonIgnore
-	private Set<Pizza> pizzas = new HashSet<Pizza>();
-	
 	public PizzaItems() {
 		super();
 		
@@ -82,14 +75,6 @@ public class PizzaItems {
 
 	public void setCategory(String category) {
 		this.category = category;
-	}
-
-	public Set<Pizza> getPizzas() {
-		return pizzas;
-	}
-
-	public void setPizzas(Set<Pizza> pizzas) {
-		this.pizzas = pizzas;
 	}
 
 	@Override

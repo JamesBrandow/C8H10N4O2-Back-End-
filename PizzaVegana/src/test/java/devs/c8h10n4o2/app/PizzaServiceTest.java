@@ -34,17 +34,17 @@ class PizzaServiceTest {
 		System.out.println(p);
 	}
 
-	//@Test
-	void findById() {
-		Pizza p = pr.findByPizzaId(1);
-		System.out.println(p);
-	}
-	
-	//@Test
-	void findByName() {
-		Pizza p = pr.findByPizzaName("Test Pizza");
-		System.out.println(p);
-	}
+//	//@Test
+//	void findById() {
+//		Pizza p = pr.findByPizzaId(1);
+//		System.out.println(p);
+//	}
+//	
+//	//@Test
+//	void findByName() {
+//		Pizza p = pr.findByPizzaName("Test Pizza");
+//		System.out.println(p);
+//	}
 	
 	
 }
