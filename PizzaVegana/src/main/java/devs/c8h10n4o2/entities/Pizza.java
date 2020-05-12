@@ -28,6 +28,7 @@ public class Pizza {
 	
 	@ManyToOne
 	@JoinColumn(name="ticket_id")
+	@JsonIgnore
 	private Ticket ticket;
 	
 	@Column(name="price")
