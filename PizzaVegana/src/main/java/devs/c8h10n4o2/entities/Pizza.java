@@ -9,9 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="pizza")
@@ -24,6 +27,7 @@ public class Pizza {
 	
 	@ManyToOne
 	@JoinColumn(name="ticket_id")
+	@JsonIgnore
 	private Ticket ticket;
 	
 	@Column(name="price")
@@ -34,11 +38,11 @@ public class Pizza {
 	
 	@Column(name = "pizza_status")
 	private String status;
-	
-	
 
-
-	@ManyToMany(mappedBy = "pizzas")
+	@ManyToMany
+	@JoinTable(name = "pizza_pizzaitems", //junction table name
+	joinColumns =  {@JoinColumn(name = "ppi_pizza_id")}, //column of entity
+	inverseJoinColumns = {@JoinColumn(name = "ppi_item_id")}) //column of the linked entity
 	Set<PizzaItems> items = new HashSet<PizzaItems>();
 
 	public Pizza() {
@@ -50,6 +54,15 @@ public class Pizza {
 		this.pizzaId = pizzaId;
 		this.price = price;
 		this.pizzaName = pizzaName;
+	}
+	
+	public Pizza(int pizzaId, Ticket ticket, double price, String pizzaName, String status) {
+		super();
+		this.pizzaId = pizzaId;
+		this.ticket = ticket;
+		this.price = price;
+		this.pizzaName = pizzaName;
+		this.status = status;
 	}
 
 	public int getPizzaId() {
@@ -90,6 +103,14 @@ public class Pizza {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public Set<PizzaItems> getItems() {
+		return items;
+	}
+
+	public void setItems(Set<PizzaItems> items) {
+		this.items = items;
 	}
 
 	@Override

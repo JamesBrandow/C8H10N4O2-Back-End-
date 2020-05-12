@@ -20,12 +20,12 @@ class UserRoleRepositoryTests {
 	
 	@Test
 	void createUserRoles() {
-		UserRole ur1 = new UserRole(0,"Employee");
-		urr.save(ur1);
-		UserRole ur2 = new UserRole(0,"Customer");
-		urr.save(ur2);
+		//UserRole ur1 = new UserRole(0,"Employee");
+		//urr.save(ur1);
+		//UserRole ur2 = new UserRole(0,"Client");
+		//urr.save(ur2);
 		UserRole ur3 = new UserRole(0,"Manager");
-		urr.save(ur2);
+		urr.save(ur3);
 	}
 	
 	@Test

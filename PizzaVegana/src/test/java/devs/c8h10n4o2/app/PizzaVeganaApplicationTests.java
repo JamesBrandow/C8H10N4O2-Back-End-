@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
+import devs.c8h10n4o2.repositories.ClientRepository;
+import devs.c8h10n4o2.repositories.PizzaRepository;
+import devs.c8h10n4o2.repositories.TicketRepository;
 import devs.c8h10n4o2.repositories.UserRoleRepository;
 
 @SpringBootTest
@@ -13,10 +16,17 @@ import devs.c8h10n4o2.repositories.UserRoleRepository;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class PizzaVeganaApplicationTests {
 
-//	@Autowired
-//	ClientRepository cr; 
 	@Autowired
-	UserRoleRepository urr;
+	UserRoleRepository ur;
+	
+	@Autowired
+	TicketRepository tr;
+	
+	@Autowired
+	ClientRepository cr;
+	
+	@Autowired
+	PizzaRepository pr;
 
 
 

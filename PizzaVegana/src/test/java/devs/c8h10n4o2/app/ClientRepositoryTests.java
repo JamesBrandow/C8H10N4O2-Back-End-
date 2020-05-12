@@ -1,5 +1,7 @@
 package devs.c8h10n4o2.app;
 
+import java.util.List;
+
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -26,26 +28,31 @@ class ClientRepositoryTests {
 	@Test
 	void createClient() {
 		UserRole ur1 =urr.findById(2).get();
-		Client cl = new Client();
-		cl.setClientId(0);
-		cl.setFirstName("test");
-		cl.setLastName("testlast2");
-		cl.setEmail("test@test2");
-		cl.setPhone("999-999-7777");
-		cl.setUsername("user3");
-		cl.setPassword("pass3");
-		cl.setUserRole(ur1);
-		cr.save(cl);
+		//Client cl = new Client(0,"ehi","ehi", ur1);
+		//cr.save(cl);
 	}
 	
 	@Test
 	void getClientByUsername() {
-		Client cl = cr.findByUsername("user3");
+		Client cl = cr.findByUsername("guest");
 		System.out.println(cl);
 	}
 	
 	
-	
+	@Test
+	void getALlClients() {
+		Iterable<Client> clients =cr.findAll();
+		List<Client> cl = (List<Client>) cr.findAll();
+		//Client cl = cr.findAll().
+		System.out.println(cl);
+	}
 
+	
+	
+	//Set<Associate> associateset = new HashSet<Associate>((Collection<? extends Associate>) associates);
+	//List<Associate> associate = (List<Associate>) ar.findAll();
+	
+	//Set<Associate> associateset1 = (HashSet<Associate>) ar.findAll();
+	//System.out.println(associateset);
 
 }

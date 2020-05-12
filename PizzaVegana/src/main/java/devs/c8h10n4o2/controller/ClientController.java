@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import devs.c8h10n4o2.entities.Client;
+import devs.c8h10n4o2.entities.UserRole;
 import devs.c8h10n4o2.services.ClientService;
 import devs.c8h10n4o2.services.UserRoleService;
 
@@ -21,10 +22,6 @@ import devs.c8h10n4o2.services.UserRoleService;
 @CrossOrigin("*")
 public class ClientController {
 	
-	
-	
-	
-
 	@Autowired
 	ClientService cs;
 	
@@ -41,32 +38,20 @@ public class ClientController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/client", method = RequestMethod.GET)
-	public Client getClientByUsername(@RequestParam String username) {
-	
-		return cs.getClientByUsername(username);
-		
-		}
-		
-		
-		@ResponseBody
-		@RequestMapping(value = "/query/clients", method = RequestMethod.GET)
-		public Client clientLogin(@RequestParam String username, @RequestParam String password) {
-			Client client = new Client();
-			client.setUsername(username);
-			client.setPassword(password);
+	@RequestMapping(value = "/query/clients", method = RequestMethod.GET)
+	public Client getClientByUsername(@RequestParam String username, @RequestParam String password) {
+		Client client = new Client();
+		client.setUsername(username);
+		client.setPassword(password);
 
-			Client c = cs.getClientByUsername(username);
-			if(c.equals(client)) {
-				return c;
-			}else {
-				return null;
-			}
-		
-		
-		
-		
-		
+		Client c = cs.getClientByUsername(username);
+		if(c.equals(client)) {
+			//System.out.println(c);
+			return c;
+		}else {
+			System.out.println("Didnt work");
+			return null;
+		}
 	}
 
 	
@@ -74,7 +59,20 @@ public class ClientController {
 	@RequestMapping(value = "/clients", method = RequestMethod.POST)
 	public Client createClient(@RequestBody Client client) {	
 		System.out.println(client);
+		UserRole ur = us.getUserRoleById(2);
+		client.setUserRole(ur);
 		return cs.createClient(client);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/updateclient", method = RequestMethod.PUT)
+	public Client updateClient(@RequestBody Client client) {
+		System.out.println(client);
+		UserRole u = us.getUserRoleById(2);
+		//System.out.println(u.getRoleId());
+		//client.setUserRole(userRole););
+		client.setUserRole(u);
+		return cs.updateClient(client);
 	}
 	
 	
