@@ -14,7 +14,7 @@ import devs.c8h10n4o2.repositories.UserRoleRepository;
 class PizzaVeganaApplicationTests {
 
 //	@Autowired
-//	ClientRepository cr; 
+//	ClientRepository cr;  
 	@Autowired
 	UserRoleRepository urr;
 

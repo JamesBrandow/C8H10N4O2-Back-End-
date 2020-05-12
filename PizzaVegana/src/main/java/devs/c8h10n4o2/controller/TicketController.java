@@ -14,7 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.google.gson.Gson;
+
+import devs.c8h10n4o2.entities.Client;
+import devs.c8h10n4o2.entities.Pizza;
 import devs.c8h10n4o2.entities.Ticket;
+import devs.c8h10n4o2.services.ClientService;
+import devs.c8h10n4o2.services.PizzaService;
 import devs.c8h10n4o2.services.TicketService;
 
 
@@ -23,15 +29,38 @@ import devs.c8h10n4o2.services.TicketService;
 @Controller
 @CrossOrigin("*")
 public class TicketController {
+	
 	@Autowired
 	TicketService ts;
 	
+	@Autowired 
+	PizzaService ps;
+	
+	@Autowired
+	ClientService cs;
 	
 	@ResponseBody
 	@RequestMapping(value = "/tickets", method = RequestMethod.POST)
-	public Ticket createTicket(@RequestBody Ticket t) {
+	public Ticket createTicket(@RequestBody String body) {
+		Gson gson = new Gson();
+		Ticket t = gson.fromJson(body, Ticket.class);
+		Client c = t.getClient();
+		t.setClient(null);
 		System.out.println(t);
-		return ts.createTicket(t); 
+		
+		for (Pizza pizza: t.getPizzas()) {
+			pizza.setTicket(t);
+		}
+		
+		t = ts.createTicket(t); 
+		c.getTickets().add(t);
+		t.setClient(c);
+		
+		ts.updateTicket(t);
+		cs.updateClient(c);
+		System.out.println(c);
+		
+		return t;
 	}
 	
 	@ResponseBody
@@ -53,6 +82,13 @@ public class TicketController {
 	public Ticket updateTicket(@RequestBody Ticket t) {
 		
 		return ts.updateTicket(t);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/tickets/client/{cid}", method = RequestMethod.GET)
+	public List<Ticket> getTicketsByClientId(@PathVariable int cid) {
+		List<Ticket> tickets = ts.getTicketsByClient(cid);
+		return tickets;
 	}
 	
 	@ResponseBody

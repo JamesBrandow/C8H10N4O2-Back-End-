@@ -1,3 +1,4 @@
+  
 package devs.c8h10n4o2.services;
 
 import java.util.List;
@@ -10,6 +11,7 @@ public interface TicketServiceI {
 	
 	Ticket getTicketById(int id);
 	List<Ticket> getAllTickets();
+	List<Ticket> getTicketsByClient(int id);
 	
 	Ticket updateTicket(Ticket t);
 	

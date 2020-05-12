@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import devs.c8h10n4o2.entities.Client;
 import devs.c8h10n4o2.entities.Ticket;
+import devs.c8h10n4o2.repositories.ClientRepository;
+import devs.c8h10n4o2.repositories.PizzaRepository;
 import devs.c8h10n4o2.repositories.TicketRepository;
 
 @Component
@@ -14,7 +17,13 @@ import devs.c8h10n4o2.repositories.TicketRepository;
 public class TicketService implements TicketServiceI{
 	
 	@Autowired
+	PizzaRepository ps;
+	
+	@Autowired
 	TicketRepository tr;
+	
+	@Autowired
+	ClientRepository cr;
 	
 	@Override
 	public Ticket createTicket(Ticket t) {
@@ -49,6 +58,13 @@ public class TicketService implements TicketServiceI{
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	@Override
+	public List<Ticket> getTicketsByClient(int id) {
+		Client c = cr.findById(id).get();
+		List<Ticket> tickets = (List<Ticket>) tr.findByClient(c);
+		return tickets;
 	}
 
 	
