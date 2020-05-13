@@ -52,10 +52,11 @@ public class PizzaController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/pizzas", method = RequestMethod.PUT)
+	@RequestMapping(value = "/updatepizza", method = RequestMethod.PUT)
 	public Pizza updatePizza(@RequestBody Pizza p) {
-		
-		return ps.updatePizza(p);
+		Pizza q = ps.getPizzaById(p.getPizzaId());
+		q.setStatus(p.getStatus());
+		return ps.updatePizza(q);
 	}
 	
 	@ResponseBody
@@ -68,5 +69,15 @@ public class PizzaController {
 		}
 		
 		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/pizzas/unbaked", method = RequestMethod.GET)
+	public List<Pizza> getAllPizzaByStatus(){
+		List<Pizza> pizzas = ps.getPizzaByStatus("unbaked");
+		for(Pizza pizza : pizzas) {
+			pizza.getItems(); 
+		}
+		return pizzas;
 	}
 }

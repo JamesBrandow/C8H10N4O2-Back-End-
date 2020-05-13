@@ -86,10 +86,11 @@ public class TicketController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/tickets", method = RequestMethod.PUT)
+	@RequestMapping(value = "/updateticket", method = RequestMethod.PUT)
 	public Ticket updateTicket(@RequestBody Ticket t) {
-		
-		return ts.updateTicket(t);
+		Ticket q = ts.getTicketById(t.getTicketId());
+		q.setStatus(t.getStatus());
+		return ts.updateTicket(q);
 	}
 	
 	@ResponseBody

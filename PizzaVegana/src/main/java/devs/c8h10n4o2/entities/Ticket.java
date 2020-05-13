@@ -43,7 +43,6 @@ public class Ticket {
 	private double cost;
 	
 	@OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
-	//@JsonIgnore
 	private Set<Pizza> pizzas = new HashSet<Pizza>();
 
 	public Ticket() {

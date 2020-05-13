@@ -48,4 +48,9 @@ public class PizzaService implements PizzaServiceI {
 			return false;
 		}
 	}
+	
+	public List<Pizza> getPizzaByStatus(String status) {
+		List<Pizza> pizzas = (List<Pizza>) pr.findByStatus(status);
+		return pizzas;
+	}
 }

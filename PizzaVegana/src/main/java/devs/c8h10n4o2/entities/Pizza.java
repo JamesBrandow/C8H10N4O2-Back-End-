@@ -40,6 +40,8 @@ public class Pizza {
 	private String status;
 
 	@ManyToMany
+//	@JsonIgnore
+//	(may need to take out)
 	@JoinTable(name = "pizza_pizzaitems", //junction table name
 	joinColumns =  {@JoinColumn(name = "ppi_pizza_id")}, //column of entity
 	inverseJoinColumns = {@JoinColumn(name = "ppi_item_id")}) //column of the linked entity
